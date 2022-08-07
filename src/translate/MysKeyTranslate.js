@@ -5,7 +5,7 @@
 const md5 = require("md5-node");
 const axios = require("axios");
 
-function MysKeyTranslate(config) {
+function MysKeyTranslate (config) {
   this.requestNumber = 0;
   this.config = {
     showProgress: true,
@@ -47,16 +47,15 @@ function MysKeyTranslate(config) {
       salt,
     };
     const fanyiApi = this.createUrl(this.baiduApi, fromData);
-    // console.log("fanyiApi", fanyiApi);
     return new Promise((resolve) => {
       axios
         .get(fanyiApi)
         .then(({ data: res }) => {
-          if (this.config.showProgress) 
-          if (!res.error_code) {
-            const resList = res.trans_result;
-            resolve(resList);
-          }
+          if (this.config.showProgress)
+            if (!res.error_code) {
+              const resList = res.trans_result;
+              resolve(resList);
+            }
         })
         .finally(() => {
           setTimeout(() => {
@@ -107,4 +106,4 @@ function MysKeyTranslate(config) {
   return this.translate;
 }
 
-module.exports =  MysKeyTranslate;
+module.exports = MysKeyTranslate;
